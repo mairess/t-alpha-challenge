@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  frontend:
+    container_name: alpha_frontend
+    restart: unless-stopped
+    build: .
+    working_dir: /app
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 5173:5173
