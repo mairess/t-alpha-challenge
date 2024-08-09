@@ -4,9 +4,11 @@ type InputProps = {
   id: string;
   name: string;
   type?: string;
+  fieldValue?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 };
 
-function Input({ label, id, name, type = 'text' }: InputProps) {
+function Input({ label, id, name, type = 'text', fieldValue = '', onChange }: InputProps) {
   return (
 
     <>
@@ -24,6 +26,8 @@ function Input({ label, id, name, type = 'text' }: InputProps) {
         type={ type }
         name={ name }
         id={ id }
+        value={ fieldValue }
+        onChange={ onChange }
       />
 
     </>
