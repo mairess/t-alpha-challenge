@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Input from './Input';
 import Button from './Button';
@@ -16,7 +16,12 @@ type FormProps = {
 };
 
 function Form({ fields, buttonText, authPromptText, authPromptLinkText, authPromptLinkTo }: FormProps) {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const location = useLocation();
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('isDarkMode');
+    return savedTheme !== null ? JSON.parse(savedTheme) : true;
+  });
+
   const [error, setError] = useState<ErrorState>({
     name: '',
     cpf: '',
@@ -25,11 +30,14 @@ function Form({ fields, buttonText, authPromptText, authPromptLinkText, authProm
     password: '',
     'confirm-password': '',
   });
-  const location = useLocation();
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
+
+  useEffect(() => {
+    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
 
   return (
     <div className={ `${isDarkMode && 'dark'}` }>
