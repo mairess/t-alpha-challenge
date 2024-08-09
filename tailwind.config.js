@@ -135,7 +135,11 @@ export default {
           light: '#388E3C',
           dark: '#4CAF50'
         }
-      }
+      },
+      backgroundImage: {
+        'gradient-light': 'linear-gradient(to top right, #F7F8F9, #B3B9C4, #8590A2)',
+        'gradient-dark': 'linear-gradient(to top right, #101214, #2C333A, #596773)',
+      },
     }
   },
   plugins: []
