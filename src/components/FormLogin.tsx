@@ -112,7 +112,7 @@ function FormLogin() {
           <AuthPrompt
             text="Don't have an account?"
             linkText="Create"
-            linkTo="/register2"
+            linkTo="/register"
           />
 
           <div className="flex items-center justify-center">

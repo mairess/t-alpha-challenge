@@ -153,7 +153,7 @@ function FormRegister() {
           <AuthPrompt
             text="Already have an account?"
             linkText="Log in"
-            linkTo="/2"
+            linkTo="/"
           />
 
         </div>
