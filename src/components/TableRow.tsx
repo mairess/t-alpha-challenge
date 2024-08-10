@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 type TableRowProps = {
   index: number,
@@ -22,6 +23,20 @@ function TableRow({ index, name, description, price, stock }: TableRowProps) {
       <div className="flex-1">{description}</div>
       <div className="flex-1">{price}</div>
       <div className="flex-1">{stock}</div>
+      <div className="flex-1">
+        <button
+          className="p-2 mx-1 rounded bg-button-primary-background-light dark:bg-button-primary-background-dark text-button-primary-text-light dark:text-button-primary-text-dark hover:bg-button-primary-hover-light dark:hover:bg-button-primary-hover-dark"
+          aria-label="Edit"
+        >
+          <FaEdit className="text-current" />
+        </button>
+        <button
+          className="p-2 mx-1 rounded bg-button-primary-background-light dark:bg-button-primary-background-dark text-button-primary-text-light dark:text-button-primary-text-dark hover:bg-button-primary-hover-light dark:hover:bg-button-primary-hover-dark"
+          aria-label="Delete"
+        >
+          <FaTrash className="text-current" />
+        </button>
+      </div>
     </div>
   );
 }

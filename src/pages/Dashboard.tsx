@@ -32,6 +32,7 @@ function Dashboard() {
           <div className="flex-1">Description</div>
           <div className="flex-1">Price</div>
           <div className="flex-1">Stock</div>
+          <div className="flex-1">Actions</div>
         </div>
 
         {data.map((product, index) => (
