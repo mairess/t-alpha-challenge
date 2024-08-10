@@ -1,19 +1,3 @@
-// export type ErrorState = {
-//   [key: string]: string;
-// };
-
-// export type ErrorResponse = {
-//   message: string[];
-//   error: string;
-//   statusCode: number;
-// };
-
-// export type SuccessResponse<T> = {
-//   success: boolean;
-//   message: string;
-//   data: T;
-// };
-
 type Data = {
   token: string;
 };
@@ -48,15 +32,23 @@ export type CreateUserFailedType = {
   status: number
 };
 
-// export type LoginSuccessResponse = SuccessResponse<LoginSuccessData>;
+export type ProductType = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number
+};
 
-// export type FormState = {
-//   [key: string]: string;
-// };
+export type GetAllProductsSuccessType = {
+  success: boolean;
+  message: string | null;
+  data: {
+    products: ProductType[]
+  };
+};
 
-// export type Field = {
-//   id: string;
-//   label: string;
-//   name: string;
-//   type: string;
-// };
+export type GetAllProductsFailedType = {
+  message: string;
+  statusCode: number
+};
