@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Input from './Input';
@@ -8,27 +8,18 @@ import Button from './Button';
 import AuthPrompt from './AuthPrompt';
 import ButtonToggleTheme from './ButtonToggleTheme';
 import login from '../services/login';
+import ThemeContext from '../context/ThemeContext';
 
 function FormLogin() {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
   const location = useLocation();
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
   const [formValues, setFormValues] = useState({ taxNumber: '', password: '' });
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('isDarkMode');
-    return savedTheme !== null ? JSON.parse(savedTheme) : true;
-  });
 
   const isFormValid = formValues.password.length >= 6 && formValues.taxNumber.length >= 11;
-
-  useEffect(() => {
-    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
-  }, [isDarkMode]);
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   const toggleStayLoggedIn = () => {
     setStayLoggedIn(!stayLoggedIn);

@@ -1,6 +1,11 @@
+import Header from '../components/Header';
+
 function Dashboard() {
   return (
-    <h1>Dashboard here</h1>
+    <header>
+      <h1>Dashboard here</h1>
+      <Header />
+    </header>
   );
 }
 
