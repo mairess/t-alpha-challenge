@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import { FormEvent, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Input from './Input';
 import Button from './Button';
@@ -11,6 +11,7 @@ import login from '../services/login';
 
 function FormLogin() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [error, setError] = useState('');
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
   const [formValues, setFormValues] = useState({ taxNumber: '', password: '' });
@@ -67,6 +68,8 @@ function FormLogin() {
     Toast.fire({
       icon: 'success',
       title: 'Logado com sucesso!',
+    }).then(() => {
+      navigate('/dashboard');
     });
   };
 
