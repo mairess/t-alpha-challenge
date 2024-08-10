@@ -7,6 +7,9 @@ function Header() {
   const navigate = useNavigate();
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
+  const storedUser = localStorage.getItem('user');
+  const user = storedUser ? JSON.parse(storedUser) : '';
+
   const handleLogout = () => {
     localStorage.clear();
     sessionStorage.clear();
@@ -32,7 +35,7 @@ function Header() {
 
         <div className="flex flex-col items-end gap">
           <div>
-            <p className="text-text-secondary-light dark:text-text-secondary-dark">fulano@mail.com</p>
+            <p className="text-text-secondary-light dark:text-text-secondary-dark">{user}</p>
           </div>
           <div>
             <button
