@@ -60,6 +60,7 @@ function FormLogin() {
       icon: 'success',
       title: 'Logado com sucesso!',
     }).then(() => {
+      localStorage.setItem('user', formValues.taxNumber);
       navigate('/dashboard');
     });
   };
