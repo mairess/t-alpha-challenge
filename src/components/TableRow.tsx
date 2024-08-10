@@ -7,9 +7,10 @@ type TableRowProps = {
   description: string,
   price: number,
   stock: number
+  onClick: () => void
 };
 
-function TableRow({ index, name, description, price, stock }: TableRowProps) {
+function TableRow({ index, name, description, price, stock, onClick }: TableRowProps) {
   const isOdd = index % 2 === 0;
 
   return (
@@ -30,6 +31,7 @@ function TableRow({ index, name, description, price, stock }: TableRowProps) {
         <button
           className="p-2 mx-1 rounded bg-button-primary-background-light dark:bg-button-primary-background-dark text-button-primary-text-light dark:text-button-primary-text-dark hover:bg-button-primary-hover-light dark:hover:bg-button-primary-hover-dark"
           aria-label="Edit"
+          onClick={ onClick }
         >
           <FaEdit className="text-current" />
         </button>
