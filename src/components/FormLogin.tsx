@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
-import { FormEvent, useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Input from './Input';
