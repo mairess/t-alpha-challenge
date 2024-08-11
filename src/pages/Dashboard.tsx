@@ -1,36 +1,69 @@
 /* eslint-disable max-len */
-import { useContext } from 'react';
-import Header from '../components/Header';
+import { useContext, useState } from 'react';
 import ThemeContext from '../context/ThemeContext';
 import TableRow from '../components/TableRow';
-import mockData from '../mocks';
 import TableHead from '../components/TableHead';
-import Footer from '../components/TableFooter';
+import Modal from '../components/ModalUpdate';
+import { ProductType } from '../types';
+import useFetchData from '../hooks/useFetchData';
+import getToken from '../utils/getToken';
 
 function Dashboard() {
   const { isDarkMode } = useContext(ThemeContext);
-  const data = mockData.data.products;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
+  const { refresh, setProductsQuantity } = useContext(ThemeContext);
+
+  const showModal = () => setIsModalOpen(!isModalOpen);
+
+  const handleRowClick = (product: ProductType) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const token = getToken();
+
+  const { data } = useFetchData({
+    url: 'https://interview.t-alpha.com.br/api/products/get-all-products',
+    token,
+    method: 'GET',
+    refresh,
+  });
+
+  setProductsQuantity(data?.data.products.length);
 
   return (
 
-    <div className={ isDarkMode ? 'dark pb-28 bg-light-neutral-800' : ' pb-28 bg-dark-neutral-900' }>
+    <div className={ `${isDarkMode && 'dark'}` }>
 
-      <Header />
+      <div className="mx-8">
 
-      <TableHead />
-
-      {data.map((product, index) => (
-        <TableRow
-          key={ index }
-          index={ index }
-          name={ product.name }
-          description={ product.description }
-          price={ product.price }
-          stock={ product.stock }
+        <Modal
+          onClose={ showModal }
+          product={ selectedProduct }
+          isModalOpen={ isModalOpen }
         />
-      ))}
 
-      <Footer />
+        <TableHead />
+
+        <div className="h-[43rem] overflow-auto">
+
+          {data?.data.products.map((product: ProductType, index: number) => (
+            <TableRow
+              key={ index }
+              index={ index }
+              id={ product.id }
+              name={ product.name }
+              description={ product.description }
+              price={ product.price }
+              stock={ product.stock }
+              onClick={ () => handleRowClick(product) }
+            />
+          ))}
+
+        </div>
+
+      </div>
 
     </div>
 

@@ -40,6 +40,13 @@ export type ProductType = {
   stock: number
 };
 
+export type ProductUpdateType = {
+  name: string;
+  description: string;
+  price: number;
+  stock: number
+};
+
 export type GetAllProductsSuccessType = {
   success: boolean;
   message: string | null;

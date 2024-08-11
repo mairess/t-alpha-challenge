@@ -74,7 +74,7 @@ function FormLogin() {
 
         <div className="p-4 border rounded border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
 
-          <h1 className="text-2xl font-bold text-center text-text-primary-light dark:text-text-primary-dark">{location.pathname === '/2' ? 'Log in' : 'Create account'}</h1>
+          <h1 className="text-2xl font-bold text-center text-text-primary-light dark:text-text-primary-dark">{location.pathname === '/' ? 'Log in' : 'Create account'}</h1>
 
           <form className="flex flex-col items-center justify-center gap-4 m-4" onSubmit={ handleSubmit }>
             <div>
