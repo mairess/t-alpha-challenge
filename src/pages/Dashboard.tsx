@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import ThemeContext from '../context/ThemeContext';
 import TableRow from '../components/TableRow';
 import TableHead from '../components/TableHead';
-import Modal from '../components/Modal';
+import Modal from '../components/ModalUpdate';
 import { ProductType } from '../types';
 import useFetchData from '../hooks/useFetchData';
 import getToken from '../utils/getToken';
@@ -12,7 +12,7 @@ function Dashboard() {
   const { isDarkMode } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
-  const [refresh, setRefresh] = useState(false);
+  const { refresh } = useContext(ThemeContext);
 
   const showModal = () => setIsModalOpen(!isModalOpen);
 
@@ -40,8 +40,6 @@ function Dashboard() {
           onClose={ showModal }
           product={ selectedProduct }
           isModalOpen={ isModalOpen }
-          refresh={ refresh }
-          setRefresh={ setRefresh }
         />
 
         <TableHead />

@@ -1,36 +1,23 @@
 /* eslint-disable max-len */
 import { FaTimes } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import Input from './Input';
-import { ProductType } from '../types';
 import getToken from '../utils/getToken';
+import ThemeContext from '../context/ThemeContext';
 
 type ModalProps = {
-  product: ProductType | null,
   onClose: () => void
   isModalOpen: boolean,
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>,
-  refresh: boolean,
 };
 
-function Modal({ product, onClose, isModalOpen, setRefresh, refresh }: ModalProps) {
+function ModalCreateProduct({ onClose, isModalOpen }: ModalProps) {
+  const { setRefresh, refresh } = useContext(ThemeContext);
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
     price: 0,
     stock: 0,
   });
-
-  useEffect(() => {
-    if (product) {
-      setFormValues({
-        name: product.name || '',
-        description: product.description || '',
-        price: product.price || 0,
-        stock: product.stock || 0,
-      });
-    }
-  }, [product]);
 
   const token = getToken();
 
@@ -45,8 +32,8 @@ function Modal({ product, onClose, isModalOpen, setRefresh, refresh }: ModalProp
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch(`https://interview.t-alpha.com.br/api/products/update-product/${product?.id}`, {
-        method: 'PATCH',
+      await fetch('https://interview.t-alpha.com.br/api/products/create-product', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -153,4 +140,4 @@ function Modal({ product, onClose, isModalOpen, setRefresh, refresh }: ModalProp
   );
 }
 
-export default Modal;
+export default ModalCreateProduct;
