@@ -1,8 +1,12 @@
 /* eslint-disable max-len */
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { useContext } from 'react';
+import getToken from '../utils/getToken';
+import ThemeContext from '../context/ThemeContext';
 
 type TableRowProps = {
   index: number,
+  id: number;
   name: string,
   description: string,
   price: number,
@@ -10,8 +14,26 @@ type TableRowProps = {
   onClick: () => void
 };
 
-function TableRow({ index, name, description, price, stock, onClick }: TableRowProps) {
+function TableRow({ index, id, name, description, price, stock, onClick }: TableRowProps) {
+  const { refresh, setRefresh } = useContext(ThemeContext);
   const isOdd = index % 2 === 0;
+
+  const token = getToken();
+
+  const handleRemove = async () => {
+    try {
+      await fetch(`https://interview.t-alpha.com.br/api/products/delete-product/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setRefresh(!refresh);
+    } catch (error: any) {
+      console.error('Failed to save changes');
+    }
+  };
 
   return (
     <div
@@ -39,6 +61,7 @@ function TableRow({ index, name, description, price, stock, onClick }: TableRowP
         <button
           className="p-2 mx-1 rounded bg-button-primary-background-light dark:bg-button-primary-background-dark text-button-primary-text-light dark:text-button-primary-text-dark hover:bg-button-primary-hover-light dark:hover:bg-button-primary-hover-dark"
           aria-label="Delete"
+          onClick={ handleRemove }
         >
           <FaTrash className="text-current" />
         </button>

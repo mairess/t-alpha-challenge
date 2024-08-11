@@ -50,6 +50,7 @@ function Dashboard() {
             <TableRow
               key={ index }
               index={ index }
+              id={ product.id }
               name={ product.name }
               description={ product.description }
               price={ product.price }
