@@ -1,11 +1,9 @@
 /* eslint-disable max-len */
 import { useContext, useState } from 'react';
-import Header from '../components/Header';
 import ThemeContext from '../context/ThemeContext';
 import TableRow from '../components/TableRow';
 import mockData from '../mocks';
 import TableHead from '../components/TableHead';
-import Footer from '../components/TableFooter';
 import Modal from '../components/Modal';
 
 function Dashboard() {
@@ -17,27 +15,27 @@ function Dashboard() {
 
   return (
 
-    <div className={ isDarkMode ? 'dark pb-28 bg-light-neutral-800' : ' pb-28 bg-dark-neutral-900' }>
+    <div className={ `${isDarkMode && 'dark'}` }>
 
-      <Modal isOpen={ isModalOpen } onClose={ showModal } />
+      <div className="mx-8">
+        <Modal isOpen={ isModalOpen } onClose={ showModal } />
 
-      <Header />
+        <TableHead />
 
-      <TableHead />
-
-      {data.map((product, index) => (
-        <TableRow
-          key={ index }
-          index={ index }
-          name={ product.name }
-          description={ product.description }
-          price={ product.price }
-          stock={ product.stock }
-          onClick={ showModal }
-        />
-      ))}
-
-      <Footer />
+        <div className="h-[43rem] overflow-auto">
+          {data.map((product, index) => (
+            <TableRow
+              key={ index }
+              index={ index }
+              name={ product.name }
+              description={ product.description }
+              price={ product.price }
+              stock={ product.stock }
+              onClick={ showModal }
+            />
+          ))}
+        </div>
+      </div>
 
     </div>
 

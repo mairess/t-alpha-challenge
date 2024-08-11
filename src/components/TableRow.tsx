@@ -15,7 +15,7 @@ function TableRow({ index, name, description, price, stock, onClick }: TableRowP
 
   return (
     <div
-      className={ `mx-8 flex items-center justify-between py-2 px-4 
+      className={ `flex items-center justify-between py-2 px-4 
     ${isOdd
         ? 'bg-light-neutral-200 dark:bg-dark-neutral-250'
         : 'bg-light-neutral-300 dark:bg-dark-neutral-300'} text-text-primary-light dark:text-text-primary-dark hover:bg-light-neutral-400 dark:hover:bg-dark-neutral-350` }
