@@ -12,7 +12,7 @@ function Dashboard() {
   const { isDarkMode } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
-  const { refresh } = useContext(ThemeContext);
+  const { refresh, setProductsQuantity } = useContext(ThemeContext);
 
   const showModal = () => setIsModalOpen(!isModalOpen);
 
@@ -29,6 +29,8 @@ function Dashboard() {
     method: 'GET',
     refresh,
   });
+
+  setProductsQuantity(data?.data.products.length);
 
   return (
 
